@@ -1,5 +1,5 @@
-N = "99" # Tu número de clase
-iniciales = "TUS-INICIALES"
+N = "3" # Tu número de clase
+iniciales = "idh"
 
 Vagrant.configure("2") do |config|
 
