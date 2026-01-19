@@ -18,17 +18,31 @@ iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT DROP
 
-###################################
+################################---
 #Reglas de proteccion local
 ################################---
 
-# 1. Permitir loopback
+# L1. Permitir loopback
+iptables -A OUTPUT -o lo -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 
-###################################
-# Reglas de proteccion de red
-###################################
+#L2. Permitir ping a cualquiero maquina interna o externa
+iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
 
+#L3. Permitir que me hagan ping desde LAN y DMZ
+iptables -A INPUT -i eth2 -s 172.1.3.0/24 -p icmp --icmp-type echo-request -j ACCEPT
+iptables -A INPUT -i eth3 -s 172.1.4.0/24 -p icmp --icmp-type echo-request -j ACCEPT
+iptables -A OUTPUT -o eth2 -d 172.1.3.1 -p icmp --icmp-type echo-reply -j ACCEPT
+iptables -A OUTPUT -o eth3 -d 172.2.3.1 -p icmp --icmp-type echo-reply -j ACCEPT
+
+#L4. Permitir consultas DNS
+iptables -A OUTPUT -o eth0 -p udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+iptables -A INPUT -i eth0 -p udp --sport 53 -m conntrack --ctstate ESTABLISHED -j ACCEPT 
+
+################################---
+# Reglas de proteccion de red
+################################---
 
 
 # Logs para depurar
