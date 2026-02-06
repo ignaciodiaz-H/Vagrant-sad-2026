@@ -1,0 +1,55 @@
+dn: uid=Lucy,ou=ou_usuarios,dc=Arasaka,dc=org
+objectClass: top
+objectClass: posixAccount
+objectClass: inetOrgPerson
+objectClass: person
+cn: Lucy Matinez Rivas
+sn: Martinez Rivas
+uid: lumari
+uidNumber: 2000
+gidNumber: 10000
+homeDirectory: /home/lumari
+loginShell: /bin/bash
+userPassword: {SSHA}h3s21F8rhmdyYzdK2goxE7o2kzBRenT0
+
+dn: uid=David,ou=ou_usuarios,dc=Arasaka,dc=org
+objectClass: top
+objectClass: posixAccount
+objectClass: inetOrgPerson
+objectClass: person
+cn: David Maritnez Rodriguez
+sn: Maritnez Rodriguez
+uid: damaro
+uidNumber: 2001
+gidNumber: 10001
+homeDirectory: /home/damaro
+loginShell: /bin/bash
+userPassword: {SSHA}h3s21F8rhmdyYzdK2goxE7o2kzBRenT0
+
+dn: uid=Adam,ou=ou_usuarios,dc=Arasaka,dc=org
+objectClass: top
+objectClass: posixAccount
+objectClass: inetOrgPerson
+objectClass: person
+cn: Adam Smasher
+sn: Smasher
+uid: adsmas
+uidNumber: 2002
+gidNumber: 10003
+homeDirectory: /home/adsmas
+loginShell: /bin/bash
+userPassword: {SSHA}h3s21F8rhmdyYzdK2goxE7o2kzBRenT0
+
+dn: uid=Rebecca,ou=ou_usuarios,dc=Arasaka,dc=org
+objectClass: top
+objectClass: posixAccount
+objectClass: inetOrgPerson
+objectClass: person
+cn: Rebecca Guts
+sn: Guts
+uid: rebgut
+uidNumber: 2003
+gidNumber: 10002
+homeDirectory: /home/rebgut
+loginShell: /bin/bash
+userPassword: {SSHA}h3s21F8rhmdyYzdK2goxE7o2kzBRenT0

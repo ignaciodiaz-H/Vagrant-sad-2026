@@ -1,0 +1,21 @@
+dn: cn=alumnos,ou=ou_grupos,dc=Arasaka,dc=org
+objectClass: top
+objectClass: posixGroup
+gidNumber: 10000
+
+dn: cn=profesores,ou=ou_grupos,dc=Arasaka,dc=org
+objectClass: top
+objectClass: posixGroup
+gidNumber: 10001
+
+dn: cn=it,ou=ou_grupos,dc=Arasaka,dc=org
+objectClass: top
+objectClass: posixGroup
+cn: it
+gidNumber: 10002
+
+dn: cn=seguridad,ou=ou_grupos,dc=Arasaka,dc=org
+objectClass: top
+objectClass: posixGroup
+cn: seguridad
+gidNumber: 10003

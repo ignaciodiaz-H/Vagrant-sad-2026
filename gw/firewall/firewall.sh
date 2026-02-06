@@ -93,6 +93,9 @@ iptables -A FORWARD -i eth0 -o eth2 -p udp --sport 123 -m conntrack --ctstate ES
 iptables -A FORWARD -i eth2 -o eth0 -p icmp --icmp-type echo-request -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -i eth0 -o eth2 -p icmp --icmp-type echo-reply -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
+#P4. Permitir trafico a ldap desde dmz
+iptables -A FORWARD -i eth2 -o eth3 -s 172.1.3.0/24 -d 172.2.3.2 -p tcp --dport 389 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i eth3 -o eth2 -s 172.2.3.2 -d 172.1.3.0/24 -p tcp --sport 389 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
 # Logs para depurar
 iptables -A INPUT -j LOG --log-prefix "IDH-INPUT: "
