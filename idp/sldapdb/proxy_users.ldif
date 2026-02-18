@@ -1,0 +1,10 @@
+# Grupo para los que tienen permiso de navegación
+dn: cn=proxy_users,ou=ou_grupos,dc=Arasaka,dc=org
+objectClass: top
+objectClass: posixGroup
+cn: proxy_users
+gidNumber: 10005
+description: Usuarios con permiso para navegar a traves del proxy
+memberUid: admin
+memberUid: lumari
+memberUid: rebgut

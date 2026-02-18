@@ -8,3 +8,4 @@ Thumbs.db
 *~
 .env
 secrets.txt
+idp/sldapdb/slapcat.txt
