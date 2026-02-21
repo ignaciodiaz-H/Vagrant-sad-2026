@@ -90,6 +90,18 @@ iptables -A FORWARD -i eth0 -o eth3 -d 172.2.3.0/24 -p udp --sport 123 -m conntr
 iptables -A FORWARD -i eth3 -o eth0 -s 172.2.3.0/24 -p icmp --icmp-type echo-request -j ACCEPT
 iptables -A FORWARD -i eth0 -o eth3 -d 172.2.3.0/24 -p icmp --icmp-type echo-reply -j ACCEPT
 
+iptables -A INPUT -i eth1 -p udp --dport 1194 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth1 -p udp --sport 1194 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+iptables -A FORWARD -o eth3 -d 172.2.3.2 -p tcp --dport 389 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i eth3 -s 172.2.3.2 -p tcp --sport 389 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+iptables -A FORWARD -i tun0 -o eth2 -s 172.3.3.0/24 -d 172.1.3.3 -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i eth2 -o tun0 -s 172.1.3.3 -d 172.3.3.0/24 -p tcp -m multiport --sports 80,443 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+iptables -A FORWARD -i tun0 -o eth3 -s 172.3.3.0/24 -d 172.2.3.2 -p tcp --dport 389 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i eth3 -o tun0 -s 172.2.3.2 -d 172.3.3.0/24 -p tcp --sport 389 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
 # R5. Permitir salir tráfico de la DMZ (sólo http/https/dns/ntp)
                         # Permitir tráfico HTTP desde la DMZ
 #  iptables -A FORWARD -i eth2 -o eth0 -p tcp --dport 80 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT

@@ -18,7 +18,11 @@ Vagrant.configure("2") do |config|
     gw.vm.network "private_network", ip: "203.0.113.254", netmask: "255.255.255.0", virtualbox__intnet: "red_wan"
     gw.vm.network "private_network", ip: "172.1.#{N}.1", netmask: "255.255.255.0", virtualbox__intnet: "red_dmz" 
     gw.vm.network "private_network", ip: "172.2.#{N}.1", netmask: "255.255.255.0", virtualbox__intnet: "red_lan"
-    gw.vm.provision "shell", path: "gw/provision.sh"   
+    gw.vm.provision "shell", 
+      path: "gw/provision.sh",
+      env: {
+        "LDAP_PASS" => ENV["LDAP_PASS"],
+      }   
     gw.vm.provider "virtualbox" do |vb|
         vb.name = "gw"
         vb.gui = false
